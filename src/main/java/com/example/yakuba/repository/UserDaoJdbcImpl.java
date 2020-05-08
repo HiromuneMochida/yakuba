@@ -18,7 +18,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	JdbcTemplate jdbc;
 
 	@Override
-	public List<User> selectMany() throws DataAccessException {
+	public List<User> selectUser() throws DataAccessException {
 
 		List<Map<String, Object>> getList = jdbc.queryForList("SELECT * FROM user");
 

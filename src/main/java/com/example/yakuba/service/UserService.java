@@ -18,8 +18,8 @@ public class UserService {
 	@Qualifier("UserDaoJdbcImpl")
 	UserDao dao;
 
-	public List<User> selectMany() {
-		return dao.selectMany();
+	public List<User> selectUser() {
+		return dao.selectUser();
 
 	}
 

@@ -11,7 +11,7 @@ import com.example.yakuba.model.User;
 import com.example.yakuba.service.UserService;
 
 @Controller
-public class HomeController {
+public class UserController {
 
     @Autowired
     UserService userService;
@@ -19,7 +19,7 @@ public class HomeController {
     @GetMapping("/userList")
     public String getUserList(Model model) {
 
-        List<User> userList = userService.selectMany();
+        List<User> userList = userService.selectUser();
         model.addAttribute("userList", userList);
 		return "userList";
     }
