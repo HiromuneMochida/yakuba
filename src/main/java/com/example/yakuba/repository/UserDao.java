@@ -8,7 +8,6 @@ import com.example.yakuba.model.User;
 
 public interface UserDao {
 
-    // Userテーブルの全データを取得.
-    public List<User> selectMany() throws DataAccessException;
+    public List<User> selectUser() throws DataAccessException;
 
 }
