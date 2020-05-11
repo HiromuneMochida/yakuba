@@ -7,26 +7,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>User Login</title>
+<title>New Custmoer</title>
 </head>
 <body>
 	<div class="container">
-		<!-- <div class="row"> -->
-			<form method="post" th:action="@{/login}">
-				<h1>Login User</h1>
-				<div class="form-group">
-					<label>Username:</label>
-					<input class="form-control" type="text" name="username" />
-				</div>
-				<div class="form-group">
-					<label>Password:</label>
-					<input class="form-control" type="password" name="password" />
-				</div>
-				<div class="form-group">
-					<button class="btn btn-success" type="submit">Login</button>
-				</div>
-			</form>
+		<h1>New Custmoer</h1>
+		<form th:action="@{/custmoer/create}" th:method="post" th:object="${custmoer}">
+			<div class="form-group">
+				<label class="control-label">名前</label>
+				<input class="form-control" type="text" th:field="*{name}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">年齢</label>
+				<input class="form-control" type="number" th:field="*{age}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">性別</label>
+				<input class="form-control" type="text" th:field="*{gender}" />
+			</div>
+			<button class="btn btn-outline-primary" type="submit">作成</button>
+		</form>
+		<div class="pull-right">
+			<a class="btn btn-primary" href="index" role="button">一覧画面へ</a>
 		</div>
-	<!-- </div> -->
+	</div>
 </body>
 </html>
