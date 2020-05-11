@@ -16,7 +16,7 @@ public class AuthController {
     @PostMapping("/login")
     public String postSignUp(Model model) {
 
-        return "redirect:/userList";
+        return "redirect:/index";
     }
 
 }
