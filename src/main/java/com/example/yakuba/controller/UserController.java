@@ -16,68 +16,68 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.yakuba.entity.Custmoer;
-import com.example.yakuba.service.CustmoerService;
+import com.example.yakuba.entity.Customer;
+import com.example.yakuba.service.CustomerService;
 
 @Controller
-@RequestMapping("/custmoer")
+@RequestMapping("/customer")
 public class UserController {
 	@Autowired
-	private CustmoerService custmoerService;
+	private CustomerService customerService;
 
 	/*顧客一覧画面**/
 	@GetMapping("/index")
 	public String getIndex(Model model) {
-		List<Custmoer> custmoer = custmoerService.findAll();
-		model.addAttribute("custmoer", custmoer);
+		List<Customer> customer = customerService.findAll();
+		model.addAttribute("customer", customer);
 		return "index";
 	}
 
 	/*新規登録画面**/
 	@GetMapping("/new")
-	public String newCustmoer(Model model) {
-		Custmoer custmoer = new Custmoer();
-		model.addAttribute("custmoer", custmoer);
+	public String newCustomer(Model model) {
+		Customer customer = new Customer();
+		model.addAttribute("customer", customer);
 		return "new";
 	}
 
 	/*ToDo編集画面**/
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model) {
-		Custmoer custmoer = custmoerService.findById(id);
-		model.addAttribute("custmoer", custmoer);
+		Customer customer = customerService.findById(id);
+		model.addAttribute("customer", customer);
 		return "edit";
 	}
 
 	/**ToDo詳細画面*/
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
-		Custmoer custmoer = custmoerService.findById(id);
-		model.addAttribute("custmoer", custmoer);
+		Customer customer = customerService.findById(id);
+		model.addAttribute("customer", customer);
 		return "show";
 	}
 
 	/**保存処理*/
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute Custmoer custmoer, BindingResult bindingResult) {
+	public String create(@Valid @ModelAttribute Customer customer, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "new";
-		custmoerService.saveAndFlush(custmoer);
-		return "redirect:/custmoer/index";
+		customerService.saveAndFlush(customer);
+		return "redirect:/customer/index";
 	}
 
 	/*更新処理**/
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Custmoer custmoer) {
-		custmoer.setId(id);
-		custmoerService.saveAndFlush(custmoer);
-		return "redirect:/custmoer/index";
+	public String update(@PathVariable Long id, @ModelAttribute Customer customer) {
+		customer.setId(id);
+		customerService.saveAndFlush(customer);
+		return "redirect:/customer/index";
 	}
 
 	/*削除処理**/
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
-		custmoerService.deleteById(id);
-		return "redirect:/custmoer/index";
+		customerService.deleteById(id);
+		return "redirect:/customer/index";
 	}
 }
