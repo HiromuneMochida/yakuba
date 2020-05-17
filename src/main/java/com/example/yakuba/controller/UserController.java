@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.yakuba.entity.Customer;
+import com.example.yakuba.model.CustomerForm;
 import com.example.yakuba.service.CustomerService;
 
 @Controller
@@ -35,7 +36,7 @@ public class UserController {
 
 	/*新規登録画面**/
 	@GetMapping("/new")
-	public String newCustomer(Model model) {
+	public String newCustomer(Model model, CustomerForm customerForm) {
 		Customer customer = new Customer();
 		model.addAttribute("customer", customer);
 		return "new";
@@ -59,9 +60,11 @@ public class UserController {
 
 	/**保存処理*/
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute Customer customer, BindingResult bindingResult) {
+	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "new";
+		//add
+		Customer customer = convertFormToModel(customerForm, new Customer());
 		customerService.saveAndFlush(customer);
 		return "redirect:/customer/index";
 	}
@@ -80,4 +83,15 @@ public class UserController {
 		customerService.deleteById(id);
 		return "redirect:/customer/index";
 	}
+
+	/** Form -> Entity */
+	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
+		customer.setId(customerForm.getId());
+		customer.setName(customerForm.getName());
+		customer.setAge(customerForm.getAge());
+		customer.setGender(customerForm.getGender());
+
+		return customer;
+	}
+	/** Entity -> Form */
 }
