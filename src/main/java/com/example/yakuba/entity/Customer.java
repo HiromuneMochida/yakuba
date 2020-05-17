@@ -8,10 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "custmoer")
+@Table(name = "custmoer")//Todo -> customer
 public class Customer {
 	@Id
-	@Column(name = "custmoer_id")
+	@Column(name = "custmoer_id")//Todo -> customer
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "name")
