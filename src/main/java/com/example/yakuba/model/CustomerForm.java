@@ -16,14 +16,34 @@ public class CustomerForm {
 	@Getter
 	@Setter
 	private Long id;
-	/** 名前 */
+	/** 名前_姓 */
 	@Getter
 	@Setter
-	private String name;
-	/** 年齢 */
+	private String nameSei;
+	/** 名前_名 */
 	@Getter
 	@Setter
-	private Integer age;
+	private String nameMei;
+	/** 生年月日_年 */
+	@Getter
+	@Setter
+	private String birthYear;
+	/** 生年月日_月 */
+	@Getter
+	@Setter
+	private String birthMonth;
+	/** 生年月日_日 */
+	@Getter
+	@Setter
+	private String birthDay;
+	/** 都道府県 */
+	@Getter
+	@Setter
+	private String prefecture;
+	/** 住所 */
+	@Getter
+	@Setter
+	private String residence;
 	/** 性別 */
 	@Getter
 	@Setter

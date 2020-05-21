@@ -87,8 +87,13 @@ public class UserController {
 	/** Form -> Entity */
 	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
 		customer.setId(customerForm.getId());
-		customer.setName(customerForm.getName());
-		customer.setAge(customerForm.getAge());
+		customer.setNameSei(customerForm.getNameSei());
+		customer.setNameMei(customerForm.getNameMei());
+		customer.setBirthYear(customerForm.getBirthYear());
+		customer.setBirthMonth(customerForm.getBirthMonth());
+		customer.setPrefecture(customerForm.getPrefecture());
+		customer.setBirthDay(customerForm.getBirthDay());
+		customer.setResidence(customerForm.getResidence());
 		customer.setGender(customerForm.getGender());
 
 		return customer;

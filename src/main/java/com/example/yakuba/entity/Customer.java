@@ -8,16 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "custmoer")//Todo -> customer
+@Table(name = "customer") //Todo -> customer
 public class Customer {
 	@Id
-	@Column(name = "custmoer_id")//Todo -> customer
+	@Column(name = "customer_id") //Todo -> customer
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "name")
-	private String name;
-	@Column(name = "age")
-	private Integer age;
+	@Column(name = "name_sei")
+	private String nameSei;
+	@Column(name = "name_mei")
+	private String nameMei;
+	@Column(name = "birth_year")
+	private String birthYear;
+	@Column(name = "birth_month")
+	private String birthMonth;
+	@Column(name = "birth_day")
+	private String birthDay;
+	@Column(name = "prefecture")
+	private String prefecture;
+	@Column(name = "residence")
+	private String residence;
 	@Column(name = "gender")
 	private String gender;
 
@@ -29,20 +39,60 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNameSei() {
+		return nameSei;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNameSei(String nameSei) {
+		this.nameSei = nameSei;
 	}
 
-	public Integer getAge() {
-		return age;
+	public String getNameMei() {
+		return nameMei;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setNameMei(String nameMei) {
+		this.nameMei = nameMei;
+	}
+
+	public String getBirthYear() {
+		return birthYear;
+	}
+
+	public void setBirthYear(String birthYear) {
+		this.birthYear = birthYear;
+	}
+
+	public String getBirthMonth() {
+		return birthMonth;
+	}
+
+	public void setBirthMonth(String birthMonth) {
+		this.birthMonth = birthMonth;
+	}
+
+	public String getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public String getPrefecture() {
+		return prefecture;
+	}
+
+	public void setPrefecture(String prefecture) {
+		this.prefecture = prefecture;
+	}
+
+	public String getResidence() {
+		return residence;
+	}
+
+	public void setResidence(String residence) {
+		this.residence = residence;
 	}
 
 	public String getGender() {
@@ -55,6 +105,8 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Custmoer [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + "]";
+		return "Custmoer [id=" + id + ", nameSei=" + nameSei + ", nameMei=" + nameMei + ",birthYear=" + birthYear
+				+ ", birthMonth=" + birthMonth + ", birthDay=" + birthDay + ", prefecture=" + prefecture + ", residence="
+				+ residence + ", gender=" + gender + "]";
 	}
 }

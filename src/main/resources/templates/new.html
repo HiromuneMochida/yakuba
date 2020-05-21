@@ -14,12 +14,32 @@
 		<h1>New Customer</h1>
 		<form th:action="@{/customer/create}" th:method="post" th:object="${customerForm}">
 			<div class="form-group">
-				<label class="control-label">名前</label>
-				<input class="form-control" type="text" th:field="*{name}" />
+				<label class="control-label">名前_姓</label>
+				<input class="form-control" type="text" th:field="*{nameSei}" />
 			</div>
 			<div class="form-group">
-				<label class="control-label">年齢</label>
-				<input class="form-control" type="number" th:field="*{age}" />
+				<label class="control-label">名前_名</label>
+				<input class="form-control" type="text" th:field="*{nameMei}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">年</label>
+				<input class="form-control" type="text" th:field="*{birthYear}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">月</label>
+				<input class="form-control" type="text" th:field="*{birthMonth}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">日</label>
+				<input class="form-control" type="text" th:field="*{birthDay}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">都道府県</label>
+				<input class="form-control" type="text" th:field="*{prefecture}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">住所</label>
+				<input class="form-control" type="text" th:field="*{residence}" />
 			</div>
 			<div class="form-group">
 				<label class="control-label">性別</label><br> <select th:field="*{gender}">
@@ -27,7 +47,7 @@
 					<option th:each="item : *{genderSelect()}" th:value="${item.value}" th:text="${item.value}" />
 				</select>
 			</div>
-			<button class="btn btn-outline-primary" type="submit">作成</button>
+			<button class="btn btn-outline-primary" type="submit">登録</button>
 			<br>
 		</form>
 		<br>
