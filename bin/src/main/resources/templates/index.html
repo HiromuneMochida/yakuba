@@ -27,8 +27,13 @@
 			<tbody>
 				<tr th:each="customer:${customer}" th:object="${customer}">
 					<td th:text="*{id}"></td>
-					<td th:text="*{name}"></td>
-					<td th:text="*{age}"></td>
+					<td th:text="*{nameSei}"></td>
+					<td th:text="*{nameMei}"></td>
+					<td th:text="*{birthYear}"></td>
+					<td th:text="*{birthMonth}"></td>
+					<td th:text="*{birthDay}"></td>
+					<td th:text="*{prefecture}"></td>
+					<td th:text="*{residence}"></td>
 					<td th:text="*{gender}"></td>
 					<td><a class="btn btn-outline-secondary btn-sm" th:href="@{{id}(id=*{id})}">参照</a></td>
 					<td><a class="btn btn-outline-secondary btn-sm" th:href="@{{id}/edit(id=*{id})}">編集</a></td>

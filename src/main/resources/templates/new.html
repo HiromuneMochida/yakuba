@@ -22,20 +22,14 @@
 				<input class="form-control" type="text" th:field="*{nameMei}" />
 			</div>
 			<div class="form-group">
-				<label class="control-label">年</label>
-				<input class="form-control" type="text" th:field="*{birthYear}" />
+				<label class="control-label">生年月日</label>
+				<input class="form-control" type="date" th:field="*{birthDay}" />
 			</div>
 			<div class="form-group">
-				<label class="control-label">月</label>
-				<input class="form-control" type="text" th:field="*{birthMonth}" />
-			</div>
-			<div class="form-group">
-				<label class="control-label">日</label>
-				<input class="form-control" type="text" th:field="*{birthDay}" />
-			</div>
-			<div class="form-group">
-				<label class="control-label">都道府県</label>
-				<input class="form-control" type="text" th:field="*{prefecture}" />
+				<label class="control-label">都道府県</label> <br> <select th:field="*{prefecture}">
+					<option value="">----------</option>
+					<option th:each="item : *{prefectureSelect()}" th:value="${item.value}" th:text="${item.value}" />
+				</select>
 			</div>
 			<div class="form-group">
 				<label class="control-label">住所</label>

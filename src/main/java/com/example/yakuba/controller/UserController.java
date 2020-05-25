@@ -89,8 +89,6 @@ public class UserController {
 		customer.setId(customerForm.getId());
 		customer.setNameSei(customerForm.getNameSei());
 		customer.setNameMei(customerForm.getNameMei());
-		customer.setBirthYear(customerForm.getBirthYear());
-		customer.setBirthMonth(customerForm.getBirthMonth());
 		customer.setPrefecture(customerForm.getPrefecture());
 		customer.setBirthDay(customerForm.getBirthDay());
 		customer.setResidence(customerForm.getResidence());

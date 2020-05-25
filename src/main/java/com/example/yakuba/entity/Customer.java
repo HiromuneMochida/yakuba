@@ -18,10 +18,6 @@ public class Customer {
 	private String nameSei;
 	@Column(name = "name_mei")
 	private String nameMei;
-	@Column(name = "birth_year")
-	private String birthYear;
-	@Column(name = "birth_month")
-	private String birthMonth;
 	@Column(name = "birth_day")
 	private String birthDay;
 	@Column(name = "prefecture")
@@ -53,22 +49,6 @@ public class Customer {
 
 	public void setNameMei(String nameMei) {
 		this.nameMei = nameMei;
-	}
-
-	public String getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(String birthYear) {
-		this.birthYear = birthYear;
-	}
-
-	public String getBirthMonth() {
-		return birthMonth;
-	}
-
-	public void setBirthMonth(String birthMonth) {
-		this.birthMonth = birthMonth;
 	}
 
 	public String getBirthDay() {
@@ -105,8 +85,8 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Custmoer [id=" + id + ", nameSei=" + nameSei + ", nameMei=" + nameMei + ",birthYear=" + birthYear
-				+ ", birthMonth=" + birthMonth + ", birthDay=" + birthDay + ", prefecture=" + prefecture + ", residence="
+		return "Custmoer [id=" + id + ", nameSei=" + nameSei + ", nameMei=" + nameMei
+				+ ", birthDay=" + birthDay + ", prefecture=" + prefecture + ", residence="
 				+ residence + ", gender=" + gender + "]";
 	}
 }
