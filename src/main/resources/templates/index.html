@@ -12,12 +12,16 @@
 <body>
 	<div class="container">
 	<h1>Customer</h1>
+	<div class="form-group">
+					<form method="post" th:action="@{/logout}">
+					<button class="btn btn-outline-info btn-sm" type="submit">ログアウト</button>
+					</form>
+				</div>
 		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>姓</th>
-					<th>名</th>
+					<th>名前</th>
 					<th>生年月日</th>
 					<th>都道府県</th>
 					<th>住所</th>
@@ -30,8 +34,7 @@
 			<tbody>
 				<tr th:each="customer:${customer}" th:object="${customer}">
 					<td th:text="*{id}"></td>
-					<td th:text="*{nameSei}"></td>
-					<td th:text="*{nameMei}"></td>
+					<td th:text="*{nameSei}+*{nameMei}"></td>
 					<td th:text="*{birthDay}"></td>
 					<td th:text="*{prefecture}"></td>
 					<td th:text="*{residence}"></td>

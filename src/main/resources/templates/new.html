@@ -13,13 +13,15 @@
 	<div class="container">
 		<h1>New Customer</h1>
 		<form th:action="@{/customer/create}" th:method="post" th:object="${customerForm}">
-			<div class="form-group">
-				<label class="control-label">名前_姓</label>
-				<input class="form-control" type="text" th:field="*{nameSei}" />
-			</div>
-			<div class="form-group">
-				<label class="control-label">名前_名</label>
-				<input class="form-control" type="text" th:field="*{nameMei}" />
+			<div class="row">
+				<div class="form-group col-6">
+					<label class="control-label">名前_姓</label>
+					<input class="form-control" type="text" th:field="*{nameSei}" />
+				</div>
+				<div class="form-group col-6">
+					<label class="control-label">名前_名</label>
+					<input class="form-control" type="text" th:field="*{nameMei}" />
+				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label">生年月日</label>
