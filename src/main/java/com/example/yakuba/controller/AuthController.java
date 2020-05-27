@@ -18,6 +18,10 @@ public class AuthController {
 
         return "redirect:/index";
     }
+    @PostMapping("/logout")
+    public String logout(Model model) {
+    	return "redirect:/login";
+    }
 
 }
 
