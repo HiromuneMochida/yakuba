@@ -44,7 +44,7 @@ public class UserController {
 
 	/*ToDo編集画面**/
 	@GetMapping("{id}/edit")
-	public String edit(@PathVariable Long id, Model model) {
+	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
 		Customer customer = customerService.findById(id);
 		model.addAttribute("customer", customer);
 		return "edit";
