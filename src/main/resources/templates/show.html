@@ -7,20 +7,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>Customer Index</title>
+<title>Customer Show</title>
 </head>
 <body>
-	<div class="container-fluid">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-				<a class="navbar-brand" href="/customer/new">新規登録</a>
-				<a class="navbar-brand" href="">検索</a>
-		</nav>
-		<br>
-		<div class="form-group">
-			<form method="post" th:action="@{/logout}">
-				<button class="btn btn-outline-info btn-sm" type="submit">ログアウト</button>
-			</form>
-		</div>
+	<div class="container">
 		<table class="table">
 			<thead>
 				<tr>
@@ -43,16 +33,12 @@
 					<td th:text="*{prefecture}"></td>
 					<td th:text="*{residence}"></td>
 					<td th:text="*{gender}"></td>
-					<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/customer/{id}(id=*{id})}">参照</a></td>
-					<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/customer/{id}/edit(id=*{id})}">編集</a></td>
-					<td>
-						<form th:action="@{{id}(id=*{id})}" th:method="delete">
-							<input class="btn-danger btn-sm" type="submit" value="削除" />
-						</form>
-					</td>
 				</tr>
 			</tbody>
 		</table>
+		<div class="pull-right">
+			<a class="btn btn-primary" href="index" role="button">一覧画面へ</a>
+		</div>
 	</div>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>Customer Edit</title>
+</head>
+<body>
+	<div class="container">
+		<h1>New Customer</h1>
+		<form th:action="@{/customer/{id}(id=*{id})}" th:method="put" th:object="${customerForm}">
+			<div class="row">
+				<div class="form-group col-6">
+					<label class="control-label">名前_姓</label>
+					<input class="form-control" type="text" th:field="*{nameSei}" />
+				</div>
+				<div class="form-group col-6">
+					<label class="control-label">名前_名</label>
+					<input class="form-control" type="text" th:field="*{nameMei}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">生年月日</label>
+				<input class="form-control" type="date" th:field="*{birthDay}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">都道府県</label> <br> <select th:field="*{prefecture}">
+					<option value="">----------</option>
+					<option th:each="item : *{prefectureSelect()}" th:value="${item.value}" th:text="${item.value}" />
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="control-label">住所</label>
+				<input class="form-control" type="text" th:field="*{residence}" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">性別</label><br> <select th:field="*{gender}">
+					<option value="">----------</option>
+					<option th:each="item : *{genderSelect()}" th:value="${item.value}" th:text="${item.value}" />
+				</select>
+			</div>
+			<button class="btn btn-outline-primary" type="submit">更新</button>
+			<br>
+		</form>
+		<br>
+		<div class="pull-right">
+			<a class="btn btn-primary" href="index" role="button">一覧画面へ</a>
+		</div>
+	</div>
+</body>
+</html>
