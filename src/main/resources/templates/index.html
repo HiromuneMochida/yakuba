@@ -10,20 +10,22 @@
 <title>Customer Index</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container-flud">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-				<a class="navbar-brand" href="/customer/new">新規登録</a>
-				<a class="navbar-brand" href="">検索</a>
+			<a class="navbar-brand" href="/customer/new">顧客登録</a> <a class="navbar-brand" href="">検索</a>
 		</nav>
 		<br>
 		<div class="form-group">
 			<form method="post" th:action="@{/logout}">
 				<button class="btn btn-outline-info btn-sm" type="submit">ログアウト</button>
 			</form>
+
 		</div>
-		<table class="table">
-			<thead>
+
+		<table class="table table-sm border">
+			<thead class="thead-dark">
 				<tr>
+					<th></th>
 					<th>ID</th>
 					<th>名前</th>
 					<th>生年月日</th>
@@ -37,6 +39,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="customer:${customer}" th:object="${customer}">
+					<td></td>
 					<td th:text="*{id}"></td>
 					<td th:text="*{nameSei}+*{nameMei}"></td>
 					<td th:text="*{birthDay}"></td>
@@ -53,6 +56,6 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+		</div>
 </body>
 </html>
