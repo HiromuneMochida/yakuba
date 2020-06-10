@@ -46,7 +46,8 @@ public class UserController {
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
 		Customer customer = customerService.findById(id);
-		model.addAttribute("customer", customer);
+		customerForm = convertModelToForm(customerForm, customer);
+		//model.addAttribute("customer", customer);
 		return "edit";
 	}
 
@@ -97,4 +98,16 @@ public class UserController {
 		return customer;
 	}
 	/** Entity -> Form */
+	private CustomerForm convertModelToForm(CustomerForm customerForm, Customer customer) {
+		customerForm.setId(customer.getId());
+		customerForm.setNameSei(customer.getNameSei());
+		customerForm.setNameMei(customer.getNameMei());
+		customerForm.setNameMei(customer.getNameMei());
+		customerForm.setPrefecture(customer.getPrefecture());
+		customerForm.setBirthDay(customer.getBirthDay());
+		customerForm.setResidence(customer.getResidence());
+		customerForm.setGender(customer.getGender());
+
+		return customerForm;
+	}
 }
