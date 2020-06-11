@@ -51,7 +51,7 @@ public class UserController {
 		return "edit";
 	}
 
-	/**ToDo詳細画面*/
+	/*ToDo詳細画面**/
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		Customer customer = customerService.findById(id);
@@ -59,7 +59,7 @@ public class UserController {
 		return "show";
 	}
 
-	/**保存処理*/
+	/*保存処理**/
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -85,7 +85,7 @@ public class UserController {
 		return "redirect:/customer/index";
 	}
 
-	/** Form -> Entity */
+	/* Form -> Entity **/
 	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
 		customer.setId(customerForm.getId());
 		customer.setNameSei(customerForm.getNameSei());
@@ -97,7 +97,7 @@ public class UserController {
 
 		return customer;
 	}
-	/** Entity -> Form */
+	/* Entity -> Form **/
 	private CustomerForm convertModelToForm(CustomerForm customerForm, Customer customer) {
 		customerForm.setId(customer.getId());
 		customerForm.setNameSei(customer.getNameSei());
