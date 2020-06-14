@@ -10,10 +10,32 @@
 <title>Customer Show</title>
 </head>
 <body>
+<!-- 共通レイアウトヘッダー -->
+	<nav class="navbar navbar-expand navbar-dark bg-dark p-1">
+		<a href="" class="navbar-brand">Yakuba</a>
+		<ul class="navbar-nav">
+			<li class="nav-item"><a href="/customer/new" class="nav-link">顧客登録</a></li>
+			<li class="nav-item"><a href="" class="nav-link">顧客検索</a></li>
+			<li class="nav-item"><a href="/customer/index" class="nav-link">顧客一覧</a></li>
+		</ul>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="form-group text-right">
+			<form method="post" th:action="@{/logout}">
+				<button class="btn btn-link btn-sm" type="submit">︎▶︎ログアウト</button>
+			</form>
+		</div>
+		<h5>顧客詳細</h5>
+		<hr>
+		<br>
+	</div>
+	<!-- 共通レイアウト -->
+	<div class="container"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 mt-5">
-				<h5>顧客詳細</h5>
+				<br>
 				<table class="table table-striped table-bordered table-condensed" th:object="${customer}">
 					<tr>
 						<th>ID</th>
@@ -42,7 +64,7 @@
 				</table>
 			</div>
 		</div>
-		<a class="btn btn-outline-secondary btn-sm" th:href="@{/customer/{id}/edit(id=*{id})}">編集</a><br> <br> <a class="btn btn-primary" href="/customer/index">一覧画面へ</a>
+		<a class="btn btn-outline-secondary btn-sm" th:href="@{/customer/{id}/edit(id=*{id})}">編集</a><br>
 	</div>
 </body>
 </html>
