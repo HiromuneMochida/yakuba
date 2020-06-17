@@ -14,6 +14,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 
+	/*顧客一覧**/
 	public List<Customer> findAll() {
 		return customerDao.findAll();
 	}
@@ -26,9 +27,14 @@ public class CustomerService {
 	public Customer saveAndFlush(Customer customer) {
 		return customerDao.saveAndFlush(customer);
 	}
-
+	/*顧客削除**/
 	public void deleteById(Long id) {
 		customerDao.deleteById(id);
+	}
+	/*顧客検索**/
+	public List<Customer> search(String nameSei,String nameMei){
+		List<Customer> result = customerDao.findAll();
+		return result;
 	}
 
 }
