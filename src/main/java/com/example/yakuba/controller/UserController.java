@@ -85,6 +85,9 @@ public class UserController {
 		return "redirect:/customer/index";
 	}
 
+	/*顧客検索**/
+
+
 	/* Form -> Entity **/
 	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
 		customer.setId(customerForm.getId());

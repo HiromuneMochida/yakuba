@@ -10,7 +10,7 @@
 <title>Customer Index</title>
 </head>
 <body>
-<!-- 共通レイアウトヘッダー -->
+	<!-- 共通レイアウトヘッダー -->
 	<nav class="navbar navbar-expand navbar-dark bg-dark p-1">
 		<a href="" class="navbar-brand">Yakuba</a>
 		<ul class="navbar-nav">
@@ -32,11 +32,32 @@
 	</div>
 	<!-- 共通レイアウト -->
 	<div class="container">
+		<div class="row">
+				<div class="card-columns">
+					<div class="card" th:each="customer:${customer}" th:object="${customer}">
+						<div class="card-header p-0">
+							<br>
+						</div>
+						<div class="card-body">
+							<p th:text="*{nameSei}+*{nameMei}"></p>
+							<!-- <a class="btn btn-info btn-sm" th:href="@{/customer/{id}(id=*{id})}">詳細</a> -->
+							<form th:action="@{{id}(id=*{id})}" th:method="delete">
+								<input class="btn btn-danger btn-sm" type="submit" value="削除" />
+							</form>
+							<form th:action="@{{id}(id=*{id})}" th:method="get">
+								<input class="btn btn-info btn-sm" type="submit" value="詳細" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="container">
 		<br>
 		<div class="border-light">
 			<table class="table table-sm rounded-sm shadow-sm">
 				<thead>
-					<tr class=table-active>
+					<tr class="table-active">
 						<th></th>
 						<th>ID</th>
 						<th>名前</th>
@@ -62,7 +83,7 @@
 						<td></td>
 						<td>
 							<form th:action="@{{id}(id=*{id})}" th:method="delete">
-								<input class="btn-danger btn-sm" type="submit" value="削除" />
+								<input class="btn btn-danger btn-sm" type="submit" value="削除" />
 							</form>
 						</td>
 					</tr>
