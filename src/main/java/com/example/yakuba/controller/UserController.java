@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.yakuba.entity.Customer;
 import com.example.yakuba.model.CustomerForm;
+import com.example.yakuba.repository.CustomerDao;
 import com.example.yakuba.service.CustomerService;
 
 @Controller
@@ -25,8 +28,10 @@ import com.example.yakuba.service.CustomerService;
 public class UserController {
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private CustomerDao customerDao;
 
-	/*顧客一覧画面**/
+	/** 顧客一覧画面 */
 	@GetMapping("/index")
 	public String getIndex(Model model) {
 		List<Customer> customer = customerService.findAll();
@@ -34,7 +39,7 @@ public class UserController {
 		return "index";
 	}
 
-	/*新規登録画面**/
+	/** 新規登録画面 */
 	@GetMapping("/new")
 	public String newCustomer(Model model, CustomerForm customerForm) {
 		Customer customer = new Customer();
@@ -42,7 +47,7 @@ public class UserController {
 		return "new";
 	}
 
-	/*ToDo編集画面**/
+	/** 編集画面 */
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
 		Customer customer = customerService.findById(id);
@@ -51,7 +56,7 @@ public class UserController {
 		return "edit";
 	}
 
-	/*ToDo詳細画面**/
+	/** 詳細画面 */
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		Customer customer = customerService.findById(id);
@@ -59,7 +64,7 @@ public class UserController {
 		return "show";
 	}
 
-	/*保存処理**/
+	/** 保存処理 */
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -70,7 +75,7 @@ public class UserController {
 		return "redirect:/customer/index";
 	}
 
-	/*更新処理**/
+	/** 更新処理 */
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Customer customer) {
 		customer.setId(id);
@@ -78,17 +83,32 @@ public class UserController {
 		return "redirect:/customer/index";
 	}
 
-	/*削除処理**/
+	/** 削除処理 */
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
 		customerService.deleteById(id);
 		return "redirect:/customer/index";
 	}
 
-	/*顧客検索**/
+	/** 顧客検索 */
+	@PostMapping("/search")
+	public ModelAndView seach(@RequestParam String keyword) {
+		ModelAndView mv = new ModelAndView();
+		List<Customer> list = customerDao.findCustomers(keyword);
+		mv.addObject("list", list);
+		mv.setViewName("search");
+		return mv;
+	}
 
+	/**検索画面初期表示**/
+	@GetMapping("/search")
+	public ModelAndView seach() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("search");
+		return mv;
+	}
 
-	/* Form -> Entity **/
+	/** Form -> Entity */
 	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
 		customer.setId(customerForm.getId());
 		customer.setNameSei(customerForm.getNameSei());
@@ -100,7 +120,8 @@ public class UserController {
 
 		return customer;
 	}
-	/* Entity -> Form **/
+
+	/** Entity -> Form */
 	private CustomerForm convertModelToForm(CustomerForm customerForm, Customer customer) {
 		customerForm.setId(customer.getId());
 		customerForm.setNameSei(customer.getNameSei());
