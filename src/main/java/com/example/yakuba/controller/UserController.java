@@ -90,7 +90,7 @@ public class UserController {
 		return "redirect:/customer/index";
 	}
 
-	/** 顧客検索 */
+	/** 顧客検索画面 */
 	@PostMapping("/search")
 	public ModelAndView seach(@RequestParam String keyword) {
 		ModelAndView mv = new ModelAndView();

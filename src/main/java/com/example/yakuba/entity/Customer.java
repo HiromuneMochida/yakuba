@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -26,6 +29,7 @@ public class Customer {
 	private String residence;
 	@Column(name = "gender")
 	private String gender;
+
 
 	public Long getId() {
 		return id;
@@ -85,8 +89,6 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Custmoer [id=" + id + ", nameSei=" + nameSei + ", nameMei=" + nameMei
-				+ ", birthDay=" + birthDay + ", prefecture=" + prefecture + ", residence="
-				+ residence + ", gender=" + gender + "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }

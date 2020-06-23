@@ -3,6 +3,9 @@ package com.example.yakuba.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +43,8 @@ public class CustomerForm {
 	@Getter
 	@Setter
 	private String gender;
+
+	/** 最終更新日 */
 
 	/** 性別選択 */
 	public Map<String, String> genderSelect() {
@@ -101,6 +106,11 @@ public class CustomerForm {
 		prefectureMap.put("46", "鹿児島県");
 		prefectureMap.put("47", "沖縄県");
 		return prefectureMap;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
 }
