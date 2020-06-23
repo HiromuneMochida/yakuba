@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <title>Customer Index</title>
 </head>
-<body>
+<body class="bg-light">
 	<!-- 共通レイアウトヘッダー -->
-	<nav class="navbar navbar-expand navbar-dark bg-dark p-1">
+	<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark p-1">
 		<a href="" class="navbar-brand">Yakuba</a>
 		<ul class="navbar-nav">
 			<li class="nav-item"><a href="/customer/new" class="nav-link">顧客登録</a></li>
@@ -21,6 +21,7 @@
 	</nav>
 	<br>
 	<div class="container">
+		<br>
 		<div class="form-group text-right">
 			<form method="post" th:action="@{/logout}">
 				<button class="btn btn-link btn-sm" type="submit">︎▶︎ログアウト</button>
@@ -34,62 +35,23 @@
 	<div class="container">
 		<div class="row">
 			<!-- Card -->
-				<div class="card-columns">
-					<div class="card" th:each="customer:${customer}" th:object="${customer}">
-						<div class="card-header p-0">
-							<br>
-						</div>
-						<div class="card-body">
-							<p th:text="*{nameSei}+*{nameMei}"></p>
-							<form th:action="@{{id}(id=*{id})}" th:method="delete">
-								<input class="btn btn-danger btn-sm" type="submit" value="削除" />
-							</form>
-							<form th:action="@{{id}(id=*{id})}" th:method="get">
-								<input class="btn btn-info btn-sm" type="submit" value="詳細" />
-							</form>
-						</div>
+			<div class="card-columns col-12">
+				<div class="card shadow-sm" th:each="customer:${customer}" th:object="${customer}">
+					<div class="card-header p-0">
+						<br>
+					</div>
+					<div class="card-body">
+						<p th:text="*{nameSei}+*{nameMei}"></p>
+						<form th:action="@{{id}(id=*{id})}" th:method="delete">
+							<input class="btn btn-danger btn-sm" type="submit" value="削除" />
+						</form>
+						<form th:action="@{{id}(id=*{id})}" th:method="get">
+							<input class="btn btn-info btn-sm" type="submit" value="詳細" />
+						</form>
 					</div>
 				</div>
-				<!-- Card -->
 			</div>
-		</div>
-	<div class="container">
-		<br>
-		<div class="border-light">
-			<table class="table table-sm rounded-sm shadow-sm">
-				<thead>
-					<tr class="table-active">
-						<th></th>
-						<th>ID</th>
-						<th>名前</th>
-						<th>生年月日</th>
-						<th>都道府県</th>
-						<th>住所</th>
-						<th>性別</th>
-						<th></th>
-						<th></th>
-						<th>削除</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="customer:${customer}" th:object="${customer}">
-						<td></td>
-						<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/customer/{id}(id=*{id})}" th:text="*{id}"></a></td>
-						<td th:text="*{nameSei}+*{nameMei}"></td>
-						<td th:text="*{birthDay}"></td>
-						<td th:text="*{prefecture}"></td>
-						<td th:text="*{residence}"></td>
-						<td th:text="*{gender}"></td>
-						<td></td>
-						<td></td>
-						<td>
-							<form th:action="@{{id}(id=*{id})}" th:method="delete">
-								<input class="btn btn-danger btn-sm" type="submit" value="削除" />
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<!-- Card -->
 		</div>
 	</div>
 </body>
