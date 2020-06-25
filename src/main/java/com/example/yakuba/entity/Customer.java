@@ -1,11 +1,24 @@
 package com.example.yakuba.entity;
 
+
+
+
+
+
+
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -29,7 +42,9 @@ public class Customer {
 	private String residence;
 	@Column(name = "gender")
 	private String gender;
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at", updatable=false)
+	private Date updatedAt;
 
 	public Long getId() {
 		return id;
@@ -86,6 +101,14 @@ public class Customer {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	/** 最終更新日 */
+	public Date getUpdatedAt() {
+        return updatedAt;
+    }
+	@PrePersist
+    public void prePersist() {
+        this.updatedAt = new Date();
+    }
 
 	@Override
 	public String toString() {
