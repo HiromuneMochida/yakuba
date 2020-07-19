@@ -114,7 +114,7 @@ public class Customer {
 
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private LoginUser user;
+	private Account user;
 
 	@Override
 	public String toString() {

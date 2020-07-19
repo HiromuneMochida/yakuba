@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "user")
-public class LoginUser {
+public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +35,7 @@ public class LoginUser {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -55,6 +56,5 @@ public class LoginUser {
 	@Setter
 	@OneToMany(mappedBy = "user")
 	private List<Customer> customerList;
-
 
 }
