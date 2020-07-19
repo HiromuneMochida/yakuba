@@ -13,19 +13,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.yakuba.entity.LoginUser;
-import com.example.yakuba.repository.LoginUserDao;
+import com.example.yakuba.entity.Account;
+import com.example.yakuba.repository.AccountRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AccountService implements UserDetailsService {
 
 	@Autowired
-	private LoginUserDao userDao;
+	private AccountRepository accountRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		LoginUser user = userDao.findUser(userName);
+		Account user = accountRepository.findByUserName(userName);
 
 		if (user == null) {
 			throw new UsernameNotFoundException("User" + userName + "was not found in the database");
