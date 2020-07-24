@@ -1,13 +1,5 @@
 package com.example.yakuba.entity;
 
-
-
-
-
-
-
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -45,9 +35,21 @@ public class Customer {
 	@Column(name = "gender")
 	private String gender;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at", updatable=false)
+	@Column(name = "updated_at", updatable = false)
 	private Date updatedAt;
+	@Column(name = "user_name")
+	private String userName;
 
+	/* ユーザー情報_名前 */
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/* ID */
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +58,7 @@ public class Customer {
 		this.id = id;
 	}
 
+	/* 名前_姓 */
 	public String getNameSei() {
 		return nameSei;
 	}
@@ -64,6 +67,7 @@ public class Customer {
 		this.nameSei = nameSei;
 	}
 
+	/* 名前_名 */
 	public String getNameMei() {
 		return nameMei;
 	}
@@ -72,6 +76,7 @@ public class Customer {
 		this.nameMei = nameMei;
 	}
 
+	/* 生年月日 */
 	public String getBirthDay() {
 		return birthDay;
 	}
@@ -80,6 +85,7 @@ public class Customer {
 		this.birthDay = birthDay;
 	}
 
+	/* 都道府県 */
 	public String getPrefecture() {
 		return prefecture;
 	}
@@ -88,6 +94,7 @@ public class Customer {
 		this.prefecture = prefecture;
 	}
 
+	/* 住所 */
 	public String getResidence() {
 		return residence;
 	}
@@ -96,6 +103,7 @@ public class Customer {
 		this.residence = residence;
 	}
 
+	/* 性別 */
 	public String getGender() {
 		return gender;
 	}
@@ -103,18 +111,16 @@ public class Customer {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	/** 最終更新日 */
-	public Date getUpdatedAt() {
-        return updatedAt;
-    }
-	@PrePersist
-    public void prePersist() {
-        this.updatedAt = new Date();
-    }
 
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private Account user;
+	/* 最終更新日 */
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		this.updatedAt = new Date();
+	}
 
 	@Override
 	public String toString() {
