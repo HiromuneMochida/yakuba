@@ -18,8 +18,9 @@ public class Account {
 	@Column(name = "user_name")
 	private String userName;
 	@Column(name = "password")
-	private String password;	
+	private String password;
 
+	/* user ID */
 	public Long getUserId() {
 		return userId;
 	}
@@ -32,7 +33,7 @@ public class Account {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
+	public void setUsername(String userName) {
 		this.userName = userName;
 	}
 

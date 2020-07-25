@@ -34,7 +34,7 @@ public class AccountService implements UserDetailsService {
 
 		Account user = accountRepository.findByUserName(userName);
 
-		if (user == null) {
+		if (user == null || "".equals(userName)) {
 			throw new UsernameNotFoundException("User" + userName + "was not found in the database");
 		}
 
