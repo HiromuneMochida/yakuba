@@ -40,7 +40,7 @@ public class Customer {
 	@Column(name = "user_name")
 	private String userName;
 
-	/* ユーザー情報_名前 */
+	/* user 名前 */
 	public String getUserName() {
 		return userName;
 	}

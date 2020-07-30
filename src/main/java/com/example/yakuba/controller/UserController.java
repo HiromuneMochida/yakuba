@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.yakuba.entity.Customer;
 import com.example.yakuba.model.CustomerForm;
-import com.example.yakuba.repository.CustomerDao;
 import com.example.yakuba.service.AccountService;
 import com.example.yakuba.service.CustomerService;
 
@@ -32,14 +31,11 @@ public class UserController {
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
-	private CustomerDao customerDao;
-	@Autowired
 	AccountService accountService;
 
 	/** 顧客一覧画面 */
 	@GetMapping("/index")
 	public String getIndex(Model model) {
-		//List<Customer> customer = customerService.findAll();
 		List<Customer> customer = accountService.findCreateUser();
 		model.addAttribute("customer", customer);
 		return "index";
@@ -58,7 +54,7 @@ public class UserController {
 	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
 		Customer customer = customerService.findById(id);
 		customerForm = convertModelToForm(customerForm, customer);
-		//model.addAttribute("customer", customer);
+
 		return "edit";
 	}
 
@@ -75,7 +71,7 @@ public class UserController {
 	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "new";
-		//add
+
 		Customer customer = convertFormToModel(customerForm, new Customer());
 		customerService.saveAndFlush(customer);
 		return "redirect:/customer/index";
@@ -89,7 +85,6 @@ public class UserController {
 		String userName = auth.getName();
 		customer.setUserName(userName);
 		customerService.saveAndFlush(customer);
-		//add
 
 		return "redirect:/customer/index";
 	}
@@ -105,9 +100,11 @@ public class UserController {
 	@PostMapping("/search")
 	public ModelAndView seach(@RequestParam String keyword) {
 		ModelAndView mv = new ModelAndView();
-		List<Customer> list = customerDao.findCustomers(keyword);
+		List<Customer> list = customerService.findCustomers(keyword);
+
 		mv.addObject("list", list);
 		mv.setViewName("search");
+
 		return mv;
 	}
 
@@ -116,6 +113,7 @@ public class UserController {
 	public ModelAndView seach() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("search");
+
 		return mv;
 	}
 
@@ -128,7 +126,7 @@ public class UserController {
 		customer.setBirthDay(customerForm.getBirthDay());
 		customer.setResidence(customerForm.getResidence());
 		customer.setGender(customerForm.getGender());
-		/* ログインしているuserId保存 */
+		/* ログインしているuserName保存 */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
 		customer.setUserName(userName);

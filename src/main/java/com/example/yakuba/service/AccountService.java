@@ -56,6 +56,7 @@ public class AccountService implements UserDetailsService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
 		List<Customer> customer = customerDao.findByUserName(userName);
+
 		return customer;
 	}
 

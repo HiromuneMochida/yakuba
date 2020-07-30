@@ -11,8 +11,9 @@ import com.example.yakuba.entity.Customer;
 
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, Long> {
-	@Query("select c from Customer c where concat(c.nameSei,c.nameMei) like %:keyword% order by c.id asc")
-	List<Customer> findCustomers(@Param("keyword") String keyword);
+	/* 顧客情報キーワード検索 */
+	@Query("select c from Customer c where c.userName=:userName and concat(c.nameSei,c.nameMei) like %:keyword% order by c.id asc")
+	List<Customer> findCustomers(@Param("keyword") String keyword, @Param("userName") String userName);
 
 	List<Customer> findByUserName(String userName);
 

@@ -20,7 +20,7 @@ public class Account {
 	@Column(name = "password")
 	private String password;
 
-	/* user ID */
+	/* ID */
 	public Long getUserId() {
 		return userId;
 	}
@@ -28,7 +28,7 @@ public class Account {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
+	/* 名前 */
 	public String getUserName() {
 		return userName;
 	}
@@ -36,7 +36,7 @@ public class Account {
 	public void setUsername(String userName) {
 		this.userName = userName;
 	}
-
+	/* パスワード */
 	public String getPassword() {
 		return password;
 	}
