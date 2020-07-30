@@ -37,7 +37,7 @@ public class CustomerService {
 		customerDao.deleteById(id);
 	}
 
-	/* 顧客キーワード検索 */
+	/* 顧客キーワード検索 + 閲覧制限 */
 	public List<Customer> findCustomers(String keyword) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();

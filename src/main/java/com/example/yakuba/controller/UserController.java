@@ -104,6 +104,7 @@ public class UserController {
 
 		mv.addObject("list", list);
 		mv.setViewName("search");
+
 		return mv;
 	}
 
@@ -112,6 +113,7 @@ public class UserController {
 	public ModelAndView seach() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("search");
+
 		return mv;
 	}
 
