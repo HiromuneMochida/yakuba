@@ -3,7 +3,7 @@ package com.example.yakuba.model;
 import lombok.Data;
 
 @Data
-public class User {
+public class AccountForm {
 
 	private int userId;
 	private String password;
