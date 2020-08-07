@@ -37,6 +37,8 @@ public class UserController {
 	@GetMapping("/index")
 	public String getIndex(Model model) {
 		List<Customer> customer = accountService.findCreateUser();
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
 		return "index";
 	}
@@ -45,6 +47,8 @@ public class UserController {
 	@GetMapping("/new")
 	public String newCustomer(Model model, CustomerForm customerForm) {
 		Customer customer = new Customer();
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
 		return "new";
 	}
@@ -54,6 +58,8 @@ public class UserController {
 	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
 		Customer customer = customerService.findById(id);
 		customerForm = convertModelToForm(customerForm, customer);
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 
 		return "edit";
 	}
@@ -62,6 +68,8 @@ public class UserController {
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		Customer customer = customerService.findById(id);
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
 		return "show";
 	}
@@ -98,9 +106,11 @@ public class UserController {
 
 	/** 顧客検索画面 */
 	@PostMapping("/search")
-	public ModelAndView seach(@RequestParam String keyword) {
+	public ModelAndView seach(Model model, @RequestParam String keyword) {
 		ModelAndView mv = new ModelAndView();
 		List<Customer> list = customerService.findCustomers(keyword);
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 
 		mv.addObject("list", list);
 		mv.setViewName("search");
@@ -108,11 +118,13 @@ public class UserController {
 		return mv;
 	}
 
-	/**検索画面初期表示**/
+	/** 検索画面初期表示 */
 	@GetMapping("/search")
-	public ModelAndView seach() {
+	public ModelAndView seach(Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("search");
+		String userName = accountService.displayUserName();
+		model.addAttribute("userName", "アカウント" + userName + "さん");
 
 		return mv;
 	}

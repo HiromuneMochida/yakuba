@@ -28,36 +28,40 @@ public class AccountService implements UserDetailsService {
 
 	@Autowired
 	private CustomerDao customerDao;
-
+	/** ユーザー認証 */
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
 		Account user = accountRepository.findByUserName(userName);
 
 		if (user == null || "".equals(userName)) {
-			throw new UsernameNotFoundException("User" + userName + "was not found in the database");
+			throw new UsernameNotFoundException("Account" + userName + "was not found in the database");
 		}
 
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-
-		GrantedAuthority authority = new SimpleGrantedAuthority("USER");
-
+		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
 		grantList.add(authority);
-
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		UserDetails userDetails = (UserDetails) new User(user.getUserName(), encoder.encode(user.getPassword()),
-				grantList);
+		UserDetails userDetails = (UserDetails) new User(user.getUsername(),encoder.encode(user.getPassword()),grantList);
 
 		return userDetails;
 	}
-	/* ログインユーザー顧客情報検索 */
+
+	/** ログインユーザー顧客情報検索 */
 	public List<Customer> findCreateUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
 		List<Customer> customer = customerDao.findByUserName(userName);
 
 		return customer;
+	}
+
+	/** ログインユーザー名表示 */
+	public String displayUserName() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userName = auth.getName();
+
+		return userName;
 	}
 
 }
