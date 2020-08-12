@@ -70,7 +70,7 @@ public class AccountService implements UserDetailsService {
 		return userName;
 	}
 
-	/** ユーザー新規登録 保存 */
+	/** ユーザー新規登録 保存処理 */
 	public Account save(Account account) {
 		return accountRepository.save(account);
 	}

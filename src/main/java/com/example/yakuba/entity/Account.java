@@ -51,7 +51,7 @@ public class Account implements UserDetails {
 	public Account() {
 	}
 
-	/** ID */
+	/** ユーザーID */
 	public Long getUserId() {
 		return userId;
 	}
