@@ -40,7 +40,7 @@ public class UserController {
 		String userName = accountService.displayUserName();
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
-		return "index";
+		return "customer/index";
 	}
 
 	/** 新規登録画面 */
@@ -50,7 +50,7 @@ public class UserController {
 		String userName = accountService.displayUserName();
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
-		return "new";
+		return "customer/new";
 	}
 
 	/** 編集画面 */
@@ -61,7 +61,7 @@ public class UserController {
 		String userName = accountService.displayUserName();
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 
-		return "edit";
+		return "customer/edit";
 	}
 
 	/** 詳細画面 */
@@ -71,14 +71,14 @@ public class UserController {
 		String userName = accountService.displayUserName();
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 		model.addAttribute("customer", customer);
-		return "show";
+		return "customer/show";
 	}
 
 	/** 保存処理 */
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
-			return "new";
+			return "customer/new";
 
 		Customer customer = convertFormToModel(customerForm, new Customer());
 		customerService.saveAndFlush(customer);
@@ -113,7 +113,7 @@ public class UserController {
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 
 		mv.addObject("list", list);
-		mv.setViewName("search");
+		mv.setViewName("customer/search");
 
 		return mv;
 	}
@@ -122,7 +122,7 @@ public class UserController {
 	@GetMapping("/search")
 	public ModelAndView seach(Model model) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("search");
+		mv.setViewName("customer/search");
 		String userName = accountService.displayUserName();
 		model.addAttribute("userName", "アカウント" + userName + "さん");
 

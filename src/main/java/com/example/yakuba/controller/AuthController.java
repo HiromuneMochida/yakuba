@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AuthController {
 	/** ログイン画面表示 */
 	@GetMapping("/login")
-	public String getSignUp(Model model) {
+	public String getLogin(Model model) {
 		return "login";
 	}
 
 	@PostMapping("/login")
-	public String postSignUp(Model model) {
+	public String postLogin(Model model) {
 
 		return "redirect:/index";
 	}

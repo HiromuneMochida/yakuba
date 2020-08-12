@@ -26,7 +26,10 @@
 						<button class="btn btn-success" type="submit">ログイン</button>
 					</div>
 				</form>
-				<a href="">新規登録はこちら</a>
+				<!-- <a href="/signup" th:href="@{/signup}">新規登録はこちら</a> -->
+				<form th:action="@{/signup}" method="get">
+					<a href="/signup">新規登録はこちら</a>
+				</form>
 			</div>
 		</div>
 	</div>
