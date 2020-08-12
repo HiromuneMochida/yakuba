@@ -16,7 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.yakuba.entity.Account;
+import com.example.yakuba.entity.Account.Authority;
 import com.example.yakuba.entity.Customer;
+import com.example.yakuba.model.CreateAccountForm;
 import com.example.yakuba.repository.AccountRepository;
 import com.example.yakuba.repository.CustomerDao;
 
@@ -28,6 +30,9 @@ public class AccountService implements UserDetailsService {
 
 	@Autowired
 	private CustomerDao customerDao;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
 	/** ユーザー認証 */
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -42,7 +47,8 @@ public class AccountService implements UserDetailsService {
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
 		grantList.add(authority);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		UserDetails userDetails = (UserDetails) new User(user.getUsername(),encoder.encode(user.getPassword()),grantList);
+		UserDetails userDetails = (UserDetails) new User(user.getUsername(), encoder.encode(user.getPassword()),
+				grantList);
 
 		return userDetails;
 	}
@@ -64,4 +70,18 @@ public class AccountService implements UserDetailsService {
 		return userName;
 	}
 
+	/** ユーザー新規登録 保存 */
+	public Account save(Account account) {
+		return accountRepository.save(account);
+	}
+
+	/** Form -> Entity */
+	public Account convertCreateAccountFormToModel(CreateAccountForm createAccountForm, Account account) {
+		account.setUserId(createAccountForm.getUserId());
+		account.setUsername(createAccountForm.getUserName());
+		account.setPassword(createAccountForm.getPassword());
+		account.setEnabled(true);
+		account.setRole(Authority.ROLE_USER);
+		return account;
+	}
 }

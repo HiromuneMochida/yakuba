@@ -48,7 +48,7 @@ public class Account implements UserDetails {
 		this.role = Authority.ROLE_USER;
 	}
 
-	protected Account() {
+	public Account() {
 	}
 
 	/** ID */
@@ -100,7 +100,11 @@ public class Account implements UserDetails {
 	/** 有効なユーザーかを判定する -> implements UserDetails */
 	@Override
 	public boolean isEnabled() {
-		return this.enabled;
+		return true;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	/** アカウントのロック状態を判定する -> implements UserDetails */
