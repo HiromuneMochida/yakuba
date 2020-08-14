@@ -30,6 +30,7 @@ public class AccountService implements UserDetailsService {
 
 	@Autowired
 	private CustomerDao customerDao;
+	/** パスワードハッシュ化 */
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
@@ -46,9 +47,7 @@ public class AccountService implements UserDetailsService {
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
 		grantList.add(authority);
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		UserDetails userDetails = (UserDetails) new User(user.getUsername(), encoder.encode(user.getPassword()),
-				grantList);
+		UserDetails userDetails = (UserDetails) new User(user.getUsername(), user.getPassword(),grantList);
 
 		return userDetails;
 	}
@@ -79,7 +78,7 @@ public class AccountService implements UserDetailsService {
 	public Account convertCreateAccountFormToModel(CreateAccountForm createAccountForm, Account account) {
 		account.setUserId(createAccountForm.getUserId());
 		account.setUsername(createAccountForm.getUserName());
-		account.setPassword(createAccountForm.getPassword());
+		account.setPassword(passwordEncoder.encode(createAccountForm.getPassword()));
 		account.setEnabled(true);
 		account.setRole(Authority.ROLE_USER);
 		return account;
