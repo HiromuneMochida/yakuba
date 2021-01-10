@@ -28,135 +28,135 @@ import com.example.yakuba.service.CustomerService;
 @Controller
 @RequestMapping("/customer")
 public class UserController {
-	@Autowired
-	private CustomerService customerService;
-	@Autowired
-	AccountService accountService;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    AccountService accountService;
 
-	/** 顧客一覧画面 */
-	@GetMapping("/index")
-	public String getIndex(Model model) {
-		List<Customer> customer = accountService.findCreateUser();
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
-		model.addAttribute("customer", customer);
-		return "customer/index";
-	}
+    /** 顧客一覧画面 */
+    @GetMapping("/index")
+    public String getIndex(Model model) {
+        List<Customer> customer = accountService.findCreateUser();
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
+        model.addAttribute("customer", customer);
+        return "customer/index";
+    }
 
-	/** 新規登録画面 */
-	@GetMapping("/new")
-	public String newCustomer(Model model, CustomerForm customerForm) {
-		Customer customer = new Customer();
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
-		model.addAttribute("customer", customer);
-		return "customer/new";
-	}
+    /** 新規登録画面 */
+    @GetMapping("/new")
+    public String newCustomer(Model model, CustomerForm customerForm) {
+        Customer customer = new Customer();
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
+        model.addAttribute("customer", customer);
+        return "customer/new";
+    }
 
-	/** 編集画面 */
-	@GetMapping("{id}/edit")
-	public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
-		Customer customer = customerService.findById(id);
-		customerForm = convertModelToForm(customerForm, customer);
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
+    /** 編集画面 */
+    @GetMapping("{id}/edit")
+    public String edit(@PathVariable Long id, Model model, CustomerForm customerForm) {
+        Customer customer = customerService.findById(id);
+        customerForm = convertModelToForm(customerForm, customer);
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
 
-		return "customer/edit";
-	}
+        return "customer/edit";
+    }
 
-	/** 詳細画面 */
-	@GetMapping("{id}")
-	public String show(@PathVariable Long id, Model model) {
-		Customer customer = customerService.findById(id);
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
-		model.addAttribute("customer", customer);
-		return "customer/show";
-	}
+    /** 詳細画面 */
+    @GetMapping("{id}")
+    public String show(@PathVariable Long id, Model model) {
+        Customer customer = customerService.findById(id);
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
+        model.addAttribute("customer", customer);
+        return "customer/show";
+    }
 
-	/** 保存処理 */
-	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
-			return "customer/new";
+    /** 保存処理 */
+    @PostMapping("/create")
+    public String create(@Valid @ModelAttribute CustomerForm customerForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "customer/new";
 
-		Customer customer = convertFormToModel(customerForm, new Customer());
-		customerService.saveAndFlush(customer);
-		return "redirect:/customer/index";
-	}
+        Customer customer = convertFormToModel(customerForm, new Customer());
+        customerService.saveAndFlush(customer);
+        return "redirect:/customer/index";
+    }
 
-	/** 更新処理 */
-	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Customer customer) {
-		customer.setId(id);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
-		customer.setUserName(userName);
-		customerService.saveAndFlush(customer);
+    /** 更新処理 */
+    @PutMapping("{id}")
+    public String update(@PathVariable Long id, @ModelAttribute Customer customer) {
+        customer.setId(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        customer.setUserName(userName);
+        customerService.saveAndFlush(customer);
 
-		return "redirect:/customer/index";
-	}
+        return "redirect:/customer/index";
+    }
 
-	/** 削除処理 */
-	@DeleteMapping("{id}")
-	public String destroy(@PathVariable Long id) {
-		customerService.deleteById(id);
-		return "redirect:/customer/index";
-	}
+    /** 削除処理 */
+    @DeleteMapping("{id}")
+    public String destroy(@PathVariable Long id) {
+        customerService.deleteById(id);
+        return "redirect:/customer/index";
+    }
 
-	/** 顧客検索画面 */
-	@PostMapping("/search")
-	public ModelAndView seach(Model model, @RequestParam String keyword) {
-		ModelAndView mv = new ModelAndView();
-		List<Customer> list = customerService.findCustomers(keyword);
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
+    /** 顧客検索画面 */
+    @PostMapping("/search")
+    public ModelAndView seach(Model model, @RequestParam String keyword) {
+        ModelAndView mv = new ModelAndView();
+        List<Customer> list = customerService.findCustomers(keyword);
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
 
-		mv.addObject("list", list);
-		mv.setViewName("customer/search");
+        mv.addObject("list", list);
+        mv.setViewName("customer/search");
 
-		return mv;
-	}
+        return mv;
+    }
 
-	/** 検索画面初期表示 */
-	@GetMapping("/search")
-	public ModelAndView seach(Model model) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("customer/search");
-		String userName = accountService.displayUserName();
-		model.addAttribute("userName", "アカウント" + userName + "さん");
+    /** 検索画面初期表示 */
+    @GetMapping("/search")
+    public ModelAndView seach(Model model) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customer/search");
+        String userName = accountService.displayUserName();
+        model.addAttribute("userName", "アカウント" + userName + "さん");
 
-		return mv;
-	}
+        return mv;
+    }
 
-	/** Form -> Entity */
-	private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
-		customer.setId(customerForm.getId());
-		customer.setNameSei(customerForm.getNameSei());
-		customer.setNameMei(customerForm.getNameMei());
-		customer.setPrefecture(customerForm.getPrefecture());
-		customer.setBirthDay(customerForm.getBirthDay());
-		customer.setResidence(customerForm.getResidence());
-		customer.setGender(customerForm.getGender());
-		/* ログインしているuserName保存 */
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
-		customer.setUserName(userName);
+    /** Form -> Entity */
+    private Customer convertFormToModel(CustomerForm customerForm, Customer customer) {
+        customer.setId(customerForm.getId());
+        customer.setNameSei(customerForm.getNameSei());
+        customer.setNameMei(customerForm.getNameMei());
+        customer.setPrefecture(customerForm.getPrefecture());
+        customer.setBirthDay(customerForm.getBirthDay());
+        customer.setResidence(customerForm.getResidence());
+        customer.setGender(customerForm.getGender());
+        /* ログインしているuserName保存 */
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        customer.setUserName(userName);
 
-		return customer;
-	}
+        return customer;
+    }
 
-	/** Entity -> Form */
-	private CustomerForm convertModelToForm(CustomerForm customerForm, Customer customer) {
-		customerForm.setId(customer.getId());
-		customerForm.setNameSei(customer.getNameSei());
-		customerForm.setNameMei(customer.getNameMei());
-		customerForm.setNameMei(customer.getNameMei());
-		customerForm.setPrefecture(customer.getPrefecture());
-		customerForm.setBirthDay(customer.getBirthDay());
-		customerForm.setResidence(customer.getResidence());
-		customerForm.setGender(customer.getGender());
+    /** Entity -> Form */
+    private CustomerForm convertModelToForm(CustomerForm customerForm, Customer customer) {
+        customerForm.setId(customer.getId());
+        customerForm.setNameSei(customer.getNameSei());
+        customerForm.setNameMei(customer.getNameMei());
+        customerForm.setNameMei(customer.getNameMei());
+        customerForm.setPrefecture(customer.getPrefecture());
+        customerForm.setBirthDay(customer.getBirthDay());
+        customerForm.setResidence(customer.getResidence());
+        customerForm.setGender(customer.getGender());
 
-		return customerForm;
-	}
+        return customerForm;
+    }
 }

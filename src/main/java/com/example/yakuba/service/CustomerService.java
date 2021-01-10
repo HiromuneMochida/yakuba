@@ -13,36 +13,36 @@ import com.example.yakuba.repository.CustomerDao;
 
 @Service
 public class CustomerService {
-	@Autowired
-	private CustomerDao customerDao;
+    @Autowired
+    private CustomerDao customerDao;
 
-	/** 顧客一覧 */
-	public List<Customer> findAll() {
-		return customerDao.findAll();
-	}
+    /** 顧客一覧 */
+    public List<Customer> findAll() {
+        return customerDao.findAll();
+    }
 
-	/** 顧客ID */
-	public Customer findById(Long id) {
-		Optional<Customer> customer = customerDao.findById(id);
-		return customer.get();
-	}
+    /** 顧客ID */
+    public Customer findById(Long id) {
+        Optional<Customer> customer = customerDao.findById(id);
+        return customer.get();
+    }
 
-	/** 顧客保存 */
-	public Customer saveAndFlush(Customer customer) {
-		return customerDao.saveAndFlush(customer);
-	}
+    /** 顧客保存 */
+    public Customer saveAndFlush(Customer customer) {
+        return customerDao.saveAndFlush(customer);
+    }
 
-	/** 顧客削除 */
-	public void deleteById(Long id) {
-		customerDao.deleteById(id);
-	}
+    /** 顧客削除 */
+    public void deleteById(Long id) {
+        customerDao.deleteById(id);
+    }
 
-	/** 顧客キーワード検索 + 閲覧制限 */
-	public List<Customer> findCustomers(String keyword) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
-		List<Customer> list = customerDao.findCustomers(keyword,userName);
-		return list;
-	}
+    /** 顧客キーワード検索 + 閲覧制限 */
+    public List<Customer> findCustomers(String keyword) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        List<Customer> list = customerDao.findCustomers(keyword, userName);
+        return list;
+    }
 
 }

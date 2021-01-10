@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+  crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -10,63 +10,63 @@
 <title>Customer Edit</title>
 </head>
 <body class="bg-light">
-	<!-- 共通レイアウトヘッダー -->
-	<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark p-1">
-		<a href="/customer/index" class="navbar-brand">Yakuba</a>
-		<ul class="navbar-nav">
-			<li class="nav-item"><a href="/customer/new" class="nav-link">顧客登録</a></li>
-			<li class="nav-item"><a href="/customer/search" class="nav-link">顧客検索</a></li>
-			<li class="nav-item"><a href="/customer/index" class="nav-link">顧客一覧</a></li>
-			<li class="nav-item"><a th:text="${userName}" class="nav-link"></a></li>
-		</ul>
-	</nav>
-	<br>
-	<div class="container">
-		<div class="form-group text-right">
-			<form method="post" th:action="@{/logout}">
-				<button class="btn btn-link btn-sm" type="submit">︎▶︎ログアウト</button>
-			</form>
-		</div>
-		<h5>顧客編集</h5>
-		<hr>
-		<br>
-	</div>
-	<!-- 共通レイアウト -->
-	<div class="container-flud">
-		<div class="col-4 offset-4">
-			<form th:action="@{/customer/{id}(id=*{id})}" th:method="put" th:object="${customerForm}">
-				<div class="form-group">
-					<label class="control-label">名前_姓</label>
-					<input class="form-control" type="text" th:field="*{nameSei}" />
-				</div>
-				<div class="form-group">
-					<label class="control-label">名前_名</label>
-					<input class="form-control" type="text" th:field="*{nameMei}" />
-				</div>
-				<div class="form-group">
-					<label class="control-label">生年月日</label>
-					<input class="form-control" type="date" th:field="*{birthDay}" />
-				</div>
-				<div class="form-group">
-					<label class="control-label">都道府県</label> <br> <select class="custom-select" th:field="*{prefecture}">
-						<option value="">----------</option>
-						<option th:each="item : *{prefectureSelect()}" th:value="${item.value}" th:text="${item.value}" />
-					</select>
-				</div>
-				<div class="form-group">
-					<label class="control-label">住所</label>
-					<input class="form-control" type="text" th:field="*{residence}" />
-				</div>
-				<div class="form-group">
-					<label class="control-label">性別</label><br> <select class="custom-select" th:field="*{gender}">
-						<option value="">----------</option>
-						<option th:each="item : *{genderSelect()}" th:value="${item.value}" th:text="${item.value}" />
-					</select>
-				</div>
-				<button class="btn btn-primary" type="submit">更新</button>
-				<br>
-			</form>
-		</div>
-	</div>
+  <!-- 共通レイアウトヘッダー -->
+  <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark p-1">
+    <a href="/customer/index" class="navbar-brand">Yakuba</a>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="/customer/new" class="nav-link">顧客登録</a></li>
+      <li class="nav-item"><a href="/customer/search" class="nav-link">顧客検索</a></li>
+      <li class="nav-item"><a href="/customer/index" class="nav-link">顧客一覧</a></li>
+      <li class="nav-item"><a th:text="${userName}" class="nav-link"></a></li>
+    </ul>
+  </nav>
+  <br>
+  <div class="container">
+    <div class="form-group text-right">
+      <form method="post" th:action="@{/logout}">
+        <button class="btn btn-link btn-sm" type="submit">︎▶︎ログアウト</button>
+      </form>
+    </div>
+    <h5>顧客編集</h5>
+    <hr>
+    <br>
+  </div>
+  <!-- 共通レイアウト -->
+  <div class="container-flud">
+    <div class="col-4 offset-4">
+      <form th:action="@{/customer/{id}(id=*{id})}" th:method="put" th:object="${customerForm}">
+        <div class="form-group">
+          <label class="control-label">名前_姓</label>
+          <input class="form-control" type="text" th:field="*{nameSei}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">名前_名</label>
+          <input class="form-control" type="text" th:field="*{nameMei}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">生年月日</label>
+          <input class="form-control" type="date" th:field="*{birthDay}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">都道府県</label> <br> <select class="custom-select" th:field="*{prefecture}">
+            <option value="">----------</option>
+            <option th:each="item : *{prefectureSelect()}" th:value="${item.value}" th:text="${item.value}" />
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">住所</label>
+          <input class="form-control" type="text" th:field="*{residence}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">性別</label><br> <select class="custom-select" th:field="*{gender}">
+            <option value="">----------</option>
+            <option th:each="item : *{genderSelect()}" th:value="${item.value}" th:text="${item.value}" />
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">更新</button>
+        <br>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
