@@ -21,108 +21,111 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "account")
 public class Account implements UserDetails {
 
-	private static final long serialVersionUID = 1L;
-	/** 権限の種類 */
-	public enum Authority {ROLE_USER, ROLE_ADMIN}
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
-	private Long userId;
-	@Column(name = "user_name")
-	private String userName;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "enabled")
-	private boolean enabled;
-	@Column(name = "role")
-	@Enumerated(EnumType.STRING)
-	private Authority role;
+    /** 権限の種類 */
+    public enum Authority {
+        ROLE_USER, ROLE_ADMIN
+    }
 
-	/** コンストラクタ */
-	public Account(Long userId, String userName, String password) {
-		this.userId = userId;
-		this.userName = userName;
-		this.password = password;
-		this.enabled = true;
-		this.role = Authority.ROLE_USER;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "enabled")
+    private boolean enabled;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Authority role;
 
-	public Account() {
-	}
+    /** コンストラクタ */
+    public Account(Long userId, String userName, String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.enabled = true;
+        this.role = Authority.ROLE_USER;
+    }
 
-	/** ユーザーID */
-	public Long getUserId() {
-		return userId;
-	}
+    public Account() {
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /** ユーザーID */
+    public Long getUserId() {
+        return userId;
+    }
 
-	/** ユーザー名を返却する -> implements UserDetails */
-	@Override
-	public String getUsername() {
-		return userName;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public void setUsername(String userName) {
-		this.userName = userName;
-	}
+    /** ユーザー名を返却する -> implements UserDetails */
+    @Override
+    public String getUsername() {
+        return userName;
+    }
 
-	/** パスワード */
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String userName) {
+        this.userName = userName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /** パスワード */
+    public String getPassword() {
+        return password;
+    }
 
-	/** 権限 */
-	public Authority getRole() {
-		return role;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setRole(Authority role) {
-		this.role = role;
-	}
+    /** 権限 */
+    public Authority getRole() {
+        return role;
+    }
 
-	/** ユーザーに与えられている権限リストを返却する -> implements UserDetails */
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(this.role.toString()));
+    public void setRole(Authority role) {
+        this.role = role;
+    }
 
-		return authorities;
-	}
+    /** ユーザーに与えられている権限リストを返却する -> implements UserDetails */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(this.role.toString()));
 
-	/** 有効なユーザーかを判定する -> implements UserDetails */
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+        return authorities;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    /** 有効なユーザーかを判定する -> implements UserDetails */
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
-	/** アカウントのロック状態を判定する -> implements UserDetails */
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	/** 資格情報の有効期限の状態を判定する -> implements UserDetails */
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    /** アカウントのロック状態を判定する -> implements UserDetails */
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-	/** アカウントの有効期限の状態を判定する -> implements UserDetails */
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    /** 資格情報の有効期限の状態を判定する -> implements UserDetails */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    /** アカウントの有効期限の状態を判定する -> implements UserDetails */
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
 }

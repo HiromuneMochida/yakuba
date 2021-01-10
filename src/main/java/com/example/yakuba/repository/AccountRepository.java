@@ -8,8 +8,8 @@ import com.example.yakuba.entity.Account;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
 
-	public Account findByUserName(String userName);
+    public Account findByUserName(String userName);
 
-	public Account findByUserId(Long userId);
+    public Account findByUserId(Long userId);
 
 }

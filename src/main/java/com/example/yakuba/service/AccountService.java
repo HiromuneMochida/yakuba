@@ -25,62 +25,62 @@ import com.example.yakuba.repository.CustomerDao;
 @Service
 public class AccountService implements UserDetailsService {
 
-	@Autowired
-	private AccountRepository accountRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	@Autowired
-	private CustomerDao customerDao;
-	/** パスワードハッシュ化 */
-	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private CustomerDao customerDao;
+    /** パスワードハッシュ化 */
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
-	/** ユーザー認証 */
-	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    /** ユーザー認証 */
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		Account user = accountRepository.findByUserName(userName);
+        Account user = accountRepository.findByUserName(userName);
 
-		if (user == null || "".equals(userName)) {
-			throw new UsernameNotFoundException("Account" + userName + "was not found in the database");
-		}
+        if (user == null || "".equals(userName)) {
+            throw new UsernameNotFoundException("Account" + userName + "was not found in the database");
+        }
 
-		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
-		grantList.add(authority);
-		UserDetails userDetails = (UserDetails) new User(user.getUsername(), user.getPassword(),grantList);
+        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
+        grantList.add(authority);
+        UserDetails userDetails = (UserDetails) new User(user.getUsername(), user.getPassword(), grantList);
 
-		return userDetails;
-	}
+        return userDetails;
+    }
 
-	/* ログインユーザー顧客情報検索 */
-	public List<Customer> findCreateUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
-		List<Customer> customer = customerDao.findByUserName(userName);
+    /* ログインユーザー顧客情報検索 */
+    public List<Customer> findCreateUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        List<Customer> customer = customerDao.findByUserName(userName);
 
-		return customer;
-	}
+        return customer;
+    }
 
-	/* ログインユーザー名表示 */
-	public String displayUserName() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
+    /* ログインユーザー名表示 */
+    public String displayUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
 
-		return userName;
-	}
+        return userName;
+    }
 
-	/* ユーザー新規登録 保存処理 */
-	public Account save(Account account) {
-		return accountRepository.save(account);
-	}
+    /* ユーザー新規登録 保存処理 */
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
 
-	/** Form -> Entity */
-	public Account convertCreateAccountFormToModel(CreateAccountForm createAccountForm, Account account) {
-		account.setUserId(createAccountForm.getUserId());
-		account.setUsername(createAccountForm.getUserName());
-		account.setPassword(passwordEncoder.encode(createAccountForm.getPassword()));
-		account.setEnabled(true);
-		account.setRole(Authority.ROLE_USER);
-		return account;
-	}
+    /** Form -> Entity */
+    public Account convertCreateAccountFormToModel(CreateAccountForm createAccountForm, Account account) {
+        account.setUserId(createAccountForm.getUserId());
+        account.setUsername(createAccountForm.getUserName());
+        account.setPassword(passwordEncoder.encode(createAccountForm.getPassword()));
+        account.setEnabled(true);
+        account.setRole(Authority.ROLE_USER);
+        return account;
+    }
 }
