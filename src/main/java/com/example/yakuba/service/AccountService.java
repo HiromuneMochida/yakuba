@@ -52,7 +52,7 @@ public class AccountService implements UserDetailsService {
 		return userDetails;
 	}
 
-	/** ログインユーザー顧客情報検索 */
+	/* ログインユーザー顧客情報検索 */
 	public List<Customer> findCreateUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
@@ -61,7 +61,7 @@ public class AccountService implements UserDetailsService {
 		return customer;
 	}
 
-	/** ログインユーザー名表示 */
+	/* ログインユーザー名表示 */
 	public String displayUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
@@ -69,7 +69,7 @@ public class AccountService implements UserDetailsService {
 		return userName;
 	}
 
-	/** ユーザー新規登録 保存処理 */
+	/* ユーザー新規登録 保存処理 */
 	public Account save(Account account) {
 		return accountRepository.save(account);
 	}
